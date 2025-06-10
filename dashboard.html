@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockVision | Dashboard</title>
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="assets/styles/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Sidebar -->
+        <nav class="app-sidebar">
+            <div class="logo">
+                <i class="fas fa-chart-network"></i>
+                <h1>StockVision</h1>
+            </div>
+            <ul>
+                <li class="active">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="stock-analyzer.html">
+                        <i class="fas fa-chart-line"></i> Stock Analyzer
+                    </a>
+                </li>
+                <li>
+                    <a href="stock-compare.html">
+                        <i class="fas fa-balance-scale"></i> Stock Compare
+                    </a>
+                </li>
+                <li>
+                    <a href="market-news.html">
+                        <i class="fas fa-newspaper"></i> Market News
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="app-content">
+            <header class="content-header">
+                <h2>Market Overview</h2>
+                <div class="last-updated">
+                    <i class="fas fa-sync-alt"></i>
+                    Last updated: <span id="update-time"></span>
+                </div>
+            </header>
+
+            <!-- Dashboard Widgets -->
+            <div class="dashboard-grid">
+                <!-- Quick Access Cards -->
+                <a href="stock-analyzer.html" class="dashboard-card analyzer-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Analyze Single Stock</h3>
+                    <p>Get detailed technical analysis for any stock</p>
+                </a>
+
+                <a href="stock-compare.html" class="dashboard-card compare-card">
+                    <i class="fas fa-balance-scale"></i>
+                    <h3>Compare Stocks</h3>
+                    <p>Side-by-side performance comparison</p>
+                </a>
+
+                <a href="market-news.html" class="dashboard-card news-card">
+                    <i class="fas fa-newspaper"></i>
+                    <h3>Market News</h3>
+                    <p>Latest financial news and trends</p>
+                </a>
+
+                <!-- Market Summary Widget -->
+                <div class="dashboard-card wide-card market-summary">
+                    <h3><i class="fas fa-globe"></i> Key Indices</h3>
+                    <div class="indices-container">
+                        <div class="index">
+                            <span class="ticker">^GSPC</span>
+                            <span class="price">4,567.89</span>
+                            <span class="change positive">+1.2%</span>
+                        </div>
+                        <div class="index">
+                            <span class="ticker">^DJI</span>
+                            <span class="price">34,567.89</span>
+                            <span class="change positive">+0.8%</span>
+                        </div>
+                        <div class="index">
+                            <span class="ticker">^IXIC</span>
+                            <span class="price">14,123.45</span>
+                            <span class="change negative">-0.3%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Watchlist Widget -->
+                <div class="dashboard-card wide-card watchlist">
+                    <h3><i class="fas fa-star"></i> My Watchlist</h3>
+                    <div class="stocks-list">
+                        <div class="stock">
+                            <span class="ticker">AAPL</span>
+                            <span class="price">$175.32</span>
+                            <span class="change positive">+2.1%</span>
+                        </div>
+                        <div class="stock">
+                            <span class="ticker">TSLA</span>
+                            <span class="price">$256.78</span>
+                            <span class="change negative">-1.2%</span>
+                        </div>
+                    </div>
+                    <button class="btn-ghost">
+                        <i class="fas fa-plus"></i> Add Stocks
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>

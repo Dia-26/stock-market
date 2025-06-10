@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Pulse | Financial News</title>
+    <link rel="stylesheet" href="market-news.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="news-dashboard">
+        <!-- Header with navigation back to main app -->
+        <header class="news-header">
+            <a href="home.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Stock Tracker
+            </a>
+            <h1><i class="fas fa-newspaper"></i> Market Pulse</h1>
+            <div class="news-controls">
+                <button id="refreshNews"><i class="fas fa-sync-alt"></i> Refresh</button>
+                <div class="category-filter">
+                    <select id="newsCategory">
+                        <option value="general">General Market</option>
+                        <option value="forex">Forex</option>
+                        <option value="crypto">Crypto</option>
+                        <option value="merger">Mergers</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <!-- News Loading Skeleton -->
+        <div class="skeleton-loading" id="loadingSkeleton">
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+        </div>
+
+        <!-- News Cards Container -->
+        <div class="news-container" id="newsContainer">
+            <!-- News cards will be inserted here by JavaScript -->
+        </div>
+
+        <!-- Footer -->
+        <footer class="news-footer">
+            <p>Data provided by Finnhub.io | Updated: <span id="lastUpdated"></span></p>
+        </footer>
+    </div>
+
+    <script src="market-news.js"></script>
+</body>
+</html>

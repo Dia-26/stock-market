@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockVision | My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --gray: #6c757d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        /* Portfolio Summary */
+        .portfolio-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .summary-card h3 {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-card p {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .positive {
+            color: var(--success);
+        }
+
+        .negative {
+            color: var(--danger);
+        }
+
+        /* Portfolio Chart */
+        .portfolio-chart {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            height: 300px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+
+        /* Holdings Table */
+        .holdings-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 0.5fr;
+            padding: 1rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+        }
+
+        .holding-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 0.5fr;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+
+        .holding-row:last-child {
+            border-bottom: none;
+        }
+
+        .stock-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .stock-info img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .action-btn:hover {
+            color: var(--primary);
+        }
+
+        /* Add Stock Form */
+        .add-stock-form {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group select {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .table-header, .holding-row {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+            }
+            
+            .mobile-hidden {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-chart-pie"></i>
+            <h1>My Portfolio</h1>
+        </div>
+    </header>
+
+    <div class="portfolio-summary">
+        <div class="summary-card">
+            <h3>Total Value</h3>
+            <p>$24,582.34</p>
+        </div>
+        <div class="summary-card">
+            <h3>Today's Change</h3>
+            <p class="positive">+$342.18 (1.41%)</p>
+        </div>
+        <div class="summary-card">
+            <h3>Total Gain/Loss</h3>
+            <p class="positive">+$2,134.52 (9.5%)</p>
+        </div>
+        <div class="summary-card">
+            <h3>Cash Balance</h3>
+            <p>$1,245.67</p>
+        </div>
+    </div>
+
+    <div class="portfolio-chart">
+        [Portfolio Performance Chart Will Appear Here]
+    </div>
+
+    <div class="holdings-container">
+        <div class="table-header">
+            <div>Stock</div>
+            <div>Shares</div>
+            <div>Avg Cost</div>
+            <div>Price</div>
+            <div>Value</div>
+            <div>Gain/Loss</div>
+            <div></div>
+        </div>
+        
+        <div class="holding-row">
+            <div class="stock-info">
+                <img src="https://logo.clearbit.com/apple.com" alt="AAPL">
+                <div>
+                    <strong>AAPL</strong>
+                    <div style="font-size: 0.8rem; color: var(--gray);">Apple Inc.</div>
+                </div>
+            </div>
+            <div>12</div>
+            <div>$145.23</div>
+            <div>$172.63</div>
+            <div>$2,071.56</div>
+            <div class="positive">+$328.80 (18.9%)</div>
+            <div><button class="action-btn"><i class="fas fa-ellipsis-v"></i></button></div>
+        </div>
+        
+        <div class="holding-row">
+            <div class="stock-info">
+                <img src="https://logo.clearbit.com/microsoft.com" alt="MSFT">
+                <div>
+                    <strong>MSFT</strong>
+                    <div style="font-size: 0.8rem; color: var(--gray);">Microsoft</div>
+                </div>
+            </div>
+            <div>8</div>
+            <div>$245.67</div>
+            <div>$312.45</div>
+            <div>$2,499.60</div>
+            <div class="positive">+$534.24 (27.2%)</div>
+            <div><button class="action-btn"><i class="fas fa-ellipsis-v"></i></button></div>
+        </div>
+        
+        <div class="holding-row">
+            <div class="stock-info">
+                <img src="https://logo.clearbit.com/tesla.com" alt="TSLA">
+                <div>
+                    <strong>TSLA</strong>
+                    <div style="font-size: 0.8rem; color: var(--gray);">Tesla Inc.</div>
+                </div>
+            </div>
+            <div>5</div>
+            <div>$210.45</div>
+            <div>$185.32</div>
+            <div>$926.60</div>
+            <div class="negative">-$125.65 (-11.9%)</div>
+            <div><button class="action-btn"><i class="fas fa-ellipsis-v"></i></button></div>
+        </div>
+    </div>
+
+    <div class="add-stock-form">
+        <h3 style="margin-bottom: 1rem;">Add New Holding</h3>
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="stockSymbol">Stock Symbol</label>
+                <input type="text" id="stockSymbol" placeholder="e.g. AAPL">
+            </div>
+            <div class="form-group">
+                <label for="shares">Shares</label>
+                <input type="number" id="shares" placeholder="0">
+            </div>
+            <div class="form-group">
+                <label for="avgCost">Average Cost</label>
+                <input type="number" id="avgCost" placeholder="0.00">
+            </div>
+            <div class="form-group">
+                <label for="purchaseDate">Purchase Date</label>
+                <input type="date" id="purchaseDate">
+            </div>
+        </div>
+        <button class="submit-btn" id="addStockBtn">Add to Portfolio</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sample data
+            const portfolioData = [
+                { symbol: 'AAPL', name: 'Apple Inc.', shares: 12, avgCost: 145.23, price: 172.63 },
+                { symbol: 'MSFT', name: 'Microsoft', shares: 8, avgCost: 245.67, price: 312.45 },
+                { symbol: 'TSLA', name: 'Tesla Inc.', shares: 5, avgCost: 210.45, price: 185.32 }
+            ];
+
+            // Calculate portfolio totals
+            function updatePortfolioSummary() {
+                let totalValue = 0;
+                let totalCost = 0;
+                
+                portfolioData.forEach(stock => {
+                    totalValue += stock.shares * stock.price;
+                    totalCost += stock.shares * stock.avgCost;
+                });
+                
+                const totalGain = totalValue - totalCost;
+                const gainPercentage = (totalGain / totalCost * 100).toFixed(2);
+                
+                // Update summary cards
+                document.querySelectorAll('.summary-card p')[0].textContent = `$${totalValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.querySelectorAll('.summary-card p')[2].textContent = `$${totalGain.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} (${gainPercentage}%)`;
+            }
+
+            // Add new stock
+            document.getElementById('addStockBtn').addEventListener('click', () => {
+                const symbol = document.getElementById('stockSymbol').value.toUpperCase();
+                const shares = parseFloat(document.getElementById('shares').value);
+                const avgCost = parseFloat(document.getElementById('avgCost').value);
+                
+                if (symbol && shares && avgCost) {
+                    // In a real app, you would fetch current price from an API
+                    const newStock = {
+                        symbol,
+                        name: symbol, // Would normally fetch company name
+                        shares,
+                        avgCost,
+                        price: avgCost // Temporary - would fetch real price
+                    };
+                    
+                    portfolioData.push(newStock);
+                    renderHoldings();
+                    updatePortfolioSummary();
+                    
+                    // Clear form
+                    document.getElementById('stockSymbol').value = '';
+                    document.getElementById('shares').value = '';
+                    document.getElementById('avgCost').value = '';
+                } else {
+                    alert('Please fill all fields');
+                }
+            });
+
+            // Render holdings table
+            function renderHoldings() {
+                const holdingsContainer = document.querySelector('.holdings-container');
+                const header = holdingsContainer.querySelector('.table-header');
+                const existingRows = holdingsContainer.querySelectorAll('.holding-row');
+                existingRows.forEach(row => row.remove());
+                
+                portfolioData.forEach(stock => {
+                    const value = stock.shares * stock.price;
+                    const cost = stock.shares * stock.avgCost;
+                    const gain = value - cost;
+                    const gainPercent = (gain / cost * 100).toFixed(2);
+                    
+                    const row = document.createElement('div');
+                    row.className = 'holding-row';
+                    row.innerHTML = `
+                        <div class="stock-info">
+                            <img src="https://logo.clearbit.com/${stock.symbol.toLowerCase()}.com" alt="${stock.symbol}" onerror="this.src='https://via.placeholder.com/30'">
+                            <div>
+                                <strong>${stock.symbol}</strong>
+                                <div style="font-size: 0.8rem; color: var(--gray);">${stock.name}</div>
+                            </div>
+                        </div>
+                        <div>${stock.shares}</div>
+                        <div>$${stock.avgCost.toFixed(2)}</div>
+                        <div>$${stock.price.toFixed(2)}</div>
+                        <div>$${value.toFixed(2)}</div>
+                        <div class="${gain >= 0 ? 'positive' : 'negative'}">
+                            ${gain >= 0 ? '+' : ''}$${Math.abs(gain).toFixed(2)} (${Math.abs(gainPercent)}%)
+                        </div>
+                        <div><button class="action-btn"><i class="fas fa-ellipsis-v"></i></button></div>
+                    `;
+                    
+                    holdingsContainer.insertBefore(row, holdingsContainer.querySelector('.add-stock-form'));
+                });
+            }
+
+            // Initialize
+            updatePortfolioSummary();
+            renderHoldings();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockVision Grid</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* === ALL CSS IN ONE === */
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --gray: #6c757d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        /* Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .grid-item {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        .grid-item i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .grid-item h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .grid-item p {
+            color: var(--gray);
+        }
+
+        /* Footer */
+        .last-updated {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-chart-line"></i>
+            <h1>StockVision</h1>
+        </div>
+        <p>Select an option to begin</p>
+    </header>
+
+    <div class="grid-container">
+        <div class="grid-item" onclick="window.location.href='index.html'">
+            <i class="fas fa-home"></i>
+            <h3>Single Stock</h3>
+            <p>Analysis of a single stock</p>
+        </div>
+        
+        <div class="grid-item" onclick="window.location.href='compare.html'">
+            <i class="fas fa-balance-scale"></i>
+            <h3>Compare Stocks</h3>
+            <p>Analyze multiple stocks</p>
+        </div>
+        
+        <div class="grid-item" onclick="window.location.href='news.html'">
+            <i class="fas fa-newspaper"></i>
+            <h3>Market News</h3>
+            <p>Latest financial updates</p>
+        </div>
+        
+        <div class="grid-item" onclick="window.location.href='portfolio.html'">
+            <i class="fas fa-chart-pie"></i>
+            <h3>Portfolio</h3>
+            <p>Track your investments</p>
+        </div>
+    </div>
+
+    <div class="last-updated"></div>
+
+    <script>
+        // === ALL JS IN ONE ===
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update last modified time
+            document.querySelector('.last-updated').textContent = 
+                `Last loaded: ${new Date().toLocaleString()}`;
+            
+            // Add animation to grid items
+            const gridItems = document.querySelectorAll('.grid-item');
+            gridItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>
